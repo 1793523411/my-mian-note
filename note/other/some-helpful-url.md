@@ -128,7 +128,7 @@
 
 [前端面试题-BFC（块格式化上下文）](https://segmentfault.com/a/1190000013647777)
 
-[[译]:BFC 与 IFC](https://segmentfault.com/a/1190000004466536) 
+[[译]:BFC 与 IFC](https://segmentfault.com/a/1190000004466536)
 
 [BFC 和 IFC 的理解（布局）](https://blog.csdn.net/paintandraw/article/details/80401741)
 
@@ -166,13 +166,13 @@
 
 [去掉 chrome 记住密码后的默认填充样式](https://blog.csdn.net/zsl_955200/article/details/78276209)
 
-[修改谷歌浏览器chrome 记住密码后自动填充表单的黄色背景](https://blog.csdn.net/M_agician/article/details/73381706)
+[修改谷歌浏览器 chrome 记住密码后自动填充表单的黄色背景](https://blog.csdn.net/M_agician/article/details/73381706)
 
 [谷歌浏览器不支持 CSS 设置小于 12px 的文字怎么办？](https://www.iteye.com/blog/570109268-2406562)
 
 [让字体变的更清晰 CSS 中-webkit-font-smoothing](https://blog.csdn.net/huo_bao/article/details/50251585)
 
-[什么是物理像素、虚拟像素、逻辑像素、设备像素，什么又是PPI,DPI,DPR 和 DIP](https://www.cnblogs.com/libin-1/p/7148377.html)
+[什么是物理像素、虚拟像素、逻辑像素、设备像素，什么又是 PPI,DPI,DPR 和 DIP](https://www.cnblogs.com/libin-1/p/7148377.html)
 
 [前端工程师需要明白的「像素」](https://www.jianshu.com/p/af6dad66e49a)
 
@@ -202,7 +202,7 @@
 
 [css3 的字体大小单位 rem 到底好在哪？](https://www.zhihu.com/question/21504656)
 
-[VW:是时候放弃 REM布局了](https://www.jianshu.com/p/e8ae1c3861dc)
+[VW:是时候放弃 REM 布局了](https://www.jianshu.com/p/e8ae1c3861dc)
 
 [为什么设计稿是 750px](https://blog.csdn.net/Honeymao/article/details/76795089)
 
@@ -214,7 +214,7 @@
 
 [CSSanimation 与 CSStransition 有何区别？](https://www.zhihu.com/question/19749045)
 
-[CSS3Transition 和Animation 区别及比较](https://blog.csdn.net/cddcj/article/details/53582334)
+[CSS3Transition 和 Animation 区别及比较](https://blog.csdn.net/cddcj/article/details/53582334)
 
 [CSS 动画简介](http://www.ruanyifeng.com/blog/2014/02/css_transition_and_animation.html)
 
@@ -230,5 +230,94 @@
 
 [css 实现上下固定中间自适应布局](https://www.jianshu.com/p/30bc9751e3e8)
 
+## javascript
 
+[JavaScript 有几种类型的值？](https://blog.csdn.net/lxcao/article/details/52749421)
 
+[JavaScript 有几种类型的值？能否画一下它们的内存图](https://blog.csdn.net/jiangjuanjaun/article/details/80327342)
+
+[什么是堆？什么是栈？他们之间有什么区别和联系？](https://www.zhihu.com/question/19729973)
+
+[标准内置对象的分类](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects)
+
+[JS 所有内置对象属性和方法汇总](https://segmentfault.com/a/1190000011467723)
+
+[JavaScript 深入理解之 undefined 与 null](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8Bundefined%E4%B8%8Enull.html)
+
+[JavaScript 深入理解之原型与原型链](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8B%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE.html)
+
+[JavaScript 字符串间的比较](https://www.jeffjade.com/2015/08/28/2015-09-02-js-string-compare/)
+
+[详解 JS 中 Number()、parseInt() 和 parseFloat() 的区别](https://blog.csdn.net/m0_38099607/article/details/72638678)
+
+[前端表单验证常用的 15 个 JS 正则表达式](http://caibaojian.com/form-regexp.html)
+
+[JS 常用正则汇总](https://www.jianshu.com/p/1cb5229325a7)
+
+[JS - 生成随机数的方法汇总（不同范围、类型的随机数](https://www.hangge.com/blog/cache/detail_1872.html)
+
+[Fisher and Yates 的原始版](https://gaohaoyang.github.io/2016/10/16/shuffle-algorithm/)
+
+[javascript 实现数组随机排序?](https://www.w3cplus.com/javascript/how-to-randomize-shuffle-a-javascript-array.html)
+
+[JavaScript 学习笔记：数组随机排序](https://www.zhihu.com/question/32303195)
+
+[JavaScript 深入理解之对象创建](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8B%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA.html)
+
+[JavaScript 深入理解之继承](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8B%E7%BB%A7%E6%89%BF.html)
+
+[JavaScript 深入理解之作用域链](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE.html)
+
+[JavaScript 深入理解之 this 详解](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8Bthis%E8%AF%A6%E8%A7%A3.html)
+
+[eval()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/eval)
+
+[DOM, DOCUMENT, BOM, WINDOW 有什么区别?](https://www.zhihu.com/question/33453164)
+
+[Window 对象](https://www.w3school.com.cn/jsref/dom_obj_window.asp)
+
+[DOM 与 BOM 分别是什么，有何关联？](https://www.zhihu.com/question/20724662)
+
+[JavaScript 学习总结（三）BOM 和 DOM 详解](https://segmentfault.com/a/1190000000654274)
+
+[JS 事件模型](https://segmentfault.com/a/1190000006934031)
+
+[Javascript 事件模型系列（一）事件及事件的三种模型](https://www.cnblogs.com/lvdabao/p/3265870.html)
+
+[Javascript 事件模型：事件捕获和事件冒泡](https://blog.csdn.net/wuseyukui/article/details/13771493)
+
+[一个 DOM 元素绑定多个事件时，先执行冒泡还是捕获](https://blog.csdn.net/u013217071/article/details/77613706)
+
+[JavaScript 事件委托详解](https://zhuanlan.zhihu.com/p/26536815)
+
+[为什么 ["1", "2", "3"].map(parseInt) 返回 [1,NaN,NaN]？](https://blog.csdn.net/justjavac/article/details/19473199)
+
+[JavaScript 深入理解之闭包](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8B%E9%97%AD%E5%8C%85.html)
+
+[Javascript 严格模式详解](http://www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html)
+
+[js 判断一个对象是否属于某一类](https://blog.csdn.net/haitunmin/article/details/78418522)
+
+[instanceof](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof)
+
+[new 操作符具体干了什么？](https://segmentfault.com/a/1190000008576048)
+
+[JavaScript 深入之 new 的模拟实现](https://github.com/mqyqingfeng/Blog/issues/13)
+
+[Object.prototype.hasOwnProperty()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
+
+[深入了解 JavaScript 中的 JSON ](https://my.oschina.net/u/3284240/blog/874368)
+
+[通过一行代码学 JavaScript](https://www.iteye.com/blog/2008winstar-2128290)
+
+[JS 延迟加载的几种方式](https://blog.csdn.net/meijory/article/details/76389762)
+
+[HTML 5 <script> async 属性](https://www.w3school.com.cn/html5/att_script_async.asp)
+
+[XMLHttpRequest 对象](https://wangdoc.com/javascript/bom/xmlhttprequest.html)
+
+[从 ajax 到 fetch、axios](https://juejin.cn/post/6844903590058786824)
+
+[Fetch 入门](https://juejin.cn/post/6844903741057925128)
+
+[传统 Ajax 已死，Fetch 永生](https://segmentfault.com/a/1190000003810652)
