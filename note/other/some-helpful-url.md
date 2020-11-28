@@ -312,7 +312,7 @@
 
 [JS 延迟加载的几种方式](https://blog.csdn.net/meijory/article/details/76389762)
 
-[HTML 5 <script> async 属性](https://www.w3school.com.cn/html5/att_script_async.asp)
+[HTML 5 `<script> async` 属性](https://www.w3school.com.cn/html5/att_script_async.asp)
 
 [XMLHttpRequest 对象](https://wangdoc.com/javascript/bom/xmlhttprequest.html)
 
@@ -372,4 +372,175 @@
 
 [简述 document.write 和 innerHTML的区别](https://www.nowcoder.com/questionTerminal/2c5d8105b2694d85b06eff85e871cf50)
 
+[DOM 概述](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Introduction)
 
+[原生 JavaScript 的 DOM 操作汇总](https://harttle.land/2015/10/01/javascript-dom-api.html)
+
+[原生 JS 中 DOM 节点相关 API 合集](https://microzz.com/2017/04/06/jsdom/)
+
+[apply、call 的区别和用途](https://juejin.cn/post/6844903470672117774)
+
+[JavaScript 深入之类数组对象与 arguments](https://github.com/mqyqingfeng/Blog/issues/14)
+
+[javascript 类数组](https://segmentfault.com/a/1190000000415572)
+
+[深入理解 JavaScript 类数组](https://blog.lxxyx.cn/2016/05/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JavaScript%E7%B1%BB%E6%95%B0%E7%BB%84/)
+
+[JavaScript 深入理解之 Array 类型详解](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8BArray%E8%AF%A6%E8%A7%A3.html)
+
+[`Array.prototype.fill()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)
+
+[尾后逗号](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Trailing_commas)
+
+[JavaScript 深入理解之变量对象](http://cavszhouyou.top/JavaScript%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1.html)
+
+[如何编写高性能的 Javascript？](https://zhuanlan.zhihu.com/p/34780474)
+
+[深入理解 V8 的垃圾回收原理](https://www.jianshu.com/p/b8ed21e8a4fb)
+
+[JavaScript 中的垃圾回收](https://zhuanlan.zhihu.com/p/23992332)
+
+[JavaScript 内存泄漏教程](http://www.ruanyifeng.com/blog/2017/04/memory-leak.html)
+
+[4 类 JavaScript 内存泄漏及如何避免](https://jinlong.github.io/2016/05/01/4-Types-of-Memory-Leaks-in-JavaScript-and-How-to-Get-Rid-Of-Them/)
+
+[杜绝 js 中四种内存泄漏类型的发生](https://juejin.cn/post/6844903553207631879)
+
+[javascript 典型内存泄漏及 chrome 的排查方法](https://segmentfault.com/a/1190000008901861)
+
+[pushState + ajax 实现浏览器无刷新前进后退](http://blog.chenxu.me/post/detail?id=ed4f0732-897f-48e4-9d4f-821e82f17fad)
+
+[Manipulating the browser history](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API)
+
+[为什么把 `script` 标签放在` body` 结束标签之后 html 结束标签之前？](https://www.zhihu.com/question/20027966)
+
+[从 Chrome 源码看浏览器如何加载资源](https://zhuanlan.zhihu.com/p/30558018)
+
+[移动端 300ms 点击延迟和点击穿透](https://juejin.cn/post/6844903633528553485)
+
+[什么是“前端路由”](https://segmentfault.com/q/1010000005336260)
+
+[浅谈前端路由](https://github.com/kaola-fed/blog/issues/137)
+
+[前端路由是什么东西？](https://www.zhihu.com/question/53064386)
+
+[浅谈前端单元测试](https://juejin.cn/post/6844903624301084680)
+
+[JavaScript 判断浏览器类型](https://www.jianshu.com/p/d99f4ca385ac)
+
+[Web 开发中的“黑话”](https://segmentfault.com/a/1190000002593432)
+
+[Polyfill 为何物](https://juejin.cn/post/6844903549768302606)
+
+[如何更有效的获取文件扩展名](https://segmentfault.com/a/1190000004993946)
+
+[轻松理解 JS 函数节流和函数防抖](https://juejin.cn/post/6844903535125987335)
+
+[JavaScript 事件节流和事件防抖](https://juejin.cn/post/6844903575663935496)
+
+[JS 的防抖与节流](https://juejin.cn/post/6844903618827517965)
+
+[escape,encodeURI,encodeURIComponent 有什么区别?](https://www.zhihu.com/question/21861899)
+
+[字符编码详解](https://blog.51cto.com/polaris/377468)
+
+[字符编码笔记：ASCII，Unicode 和 UTF-8](http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html)
+
+[浏览器事件循环机制（event loop）](https://juejin.cn/post/6844903606466904078)
+
+[详解 JavaScript中的 Event Loop（事件循环）机制](https://zhuanlan.zhihu.com/p/33058983)
+
+[什么是 Event Loop？](http://www.ruanyifeng.com/blog/2013/10/event_loop.html)
+
+[这一次，彻底弄懂 JavaScript 执行机制](https://juejin.cn/post/6844903512845860872)
+
+[JavaScript 专题之深浅拷贝](https://github.com/mqyqingfeng/Blog/issues/32)
+
+[JavaScript 专题之函数柯里化](https://github.com/mqyqingfeng/Blog/issues/42)
+
+[十进制的 0.1 为什么不能用二进制很好的表示？](https://blog.csdn.net/Lixuanshengchao/article/details/82049191)
+
+[十进制浮点数转成二进制](https://blog.csdn.net/zhengyanan815/article/details/78550073)
+
+[浮点数的二进制表示](http://www.ruanyifeng.com/blog/2010/06/ieee_floating-point_representation.html)
+
+[js 浮点数存储精度丢失原理](https://juejin.cn/post/6844903630185693192)
+
+[浮点数精度之谜](https://juejin.cn/post/6844903486966988813)
+
+[JavaScript 浮点数陷阱及解法](https://github.com/camsong/blog/issues/9)
+
+[0.1+0.2 !== 0.3？](https://juejin.cn/post/6844903700356399112)
+
+[JavaScript 中奇特的~运算符](https://juejin.cn/post/6844903501357645831)
+
+[关于 2 的补码](http://www.ruanyifeng.com/blog/2009/08/twos_complement.html)
+
+[你需要知道的 requestAnimationFrame](https://juejin.cn/post/6844903565048152078)
+
+[CSS3 动画那么强，requestAnimationFrame 还有毛线用](https://www.zhangxinxu.com/wordpress/2013/09/css3-animation-requestanimationframe-tween-%E5%8A%A8%E7%94%BB%E7%AE%97%E6%B3%95/)
+
+[最全的获取元素宽高及位置的方法](https://juejin.cn/post/6844903695428108302)
+
+[用 Javascript 获取页面元素的位置](http://www.ruanyifeng.com/blog/2009/09/find_element_s_position_using_javascript.html)
+
+[函数式编程初探](http://www.ruanyifeng.com/blog/2012/04/functional_programming.html)
+
+## 安全
+
+[前端安全系列（一）：如何防止 XSS 攻击？](https://juejin.cn/post/6844903685122703367)
+
+[内容安全策略（CSP）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)
+
+[前端安全系列之二：如何防止 CSRF 攻击？](https://juejin.cn/post/6844903689702866952)
+
+[`[ HTTP趣谈]` origin, referer 和 host 区别](https://www.jianshu.com/p/1f9c71850299)
+
+[web 安全之--点击劫持攻击与防御技术简介](https://www.jianshu.com/p/251704d8ff18)
+
+[web 安全之--点击劫持攻击与防御技术简介](https://www.jianshu.com/p/251704d8ff18)
+
+[Web 安全漏洞之 SQL 注入](https://juejin.cn/post/6844903700901658632)
+
+[如何防范常见的 Web 攻击](http://blog.720ui.com/2016/security_web/)
+
+## vue
+
+[Vue.js 双向绑定的实现原理](https://www.cnblogs.com/kidney/p/6052935.html?utm_source=gold_browser_extension)
+
+
+[`Object.defineProperty()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
+
+[理解 Virtual DOM](https://github.com/y8n/blog/issues/5)
+
+[深度剖析：如何实现一个 Virtual DOM 算法](https://github.com/livoras/blog/issues/13)
+
+[网上都说操作真实 DOM 慢，但测试结果却比 React 更快，为什么？](https://www.zhihu.com/question/31809713/answer/53544875)
+
+## 工程化
+
+[不聊 webpack 配置，来说说它的原理](https://juejin.cn/post/6844903630554808334)
+
+[前端工程化——构建工具选型：grunt、gulp、webpack](https://juejin.cn/post/6844903645700423693)
+
+[浅入浅出 webpack](https://juejin.cn/post/6844903606122971144)
+
+[前端构建工具发展及其比较](https://juejin.cn/post/6844903599999303694)
+
+
+## 设计模式
+
+[浅析前端开发中的 MVC/MVP/MVVM 模式](https://juejin.cn/post/6844903480126078989)
+
+[MVC，MVP 和 MVVM 的图示](http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html)
+
+[一篇文章了解架构模式：MVC/MVP/MVVM](https://segmentfault.com/a/1190000015310674)
+
+
+## 计算机网络
+
+[HTTP 协议中 URI 和 URL 有什么区别？](https://www.zhihu.com/question/21950864)
+
+[URI、URL 和 URN 的区别](https://segmentfault.com/a/1190000006081973)
+
+[HTML 关于 post 和 get 的区别以及缓存问题的理解](https://blog.csdn.net/qq_27093465/article/details/50479289)
