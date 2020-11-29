@@ -486,6 +486,48 @@
 
 [函数式编程初探](http://www.ruanyifeng.com/blog/2012/04/functional_programming.html)
 
+[mouseenter 与 mouseover 为何这般纠缠不清？](https://github.com/qianlongo/zepto-analysis/issues/1)
+
+[原生 js 实现拖拽功能基本思路](https://blog.csdn.net/LZGS_4/article/details/43523465)
+
+[用 setTimeout 实现 setInterval](https://www.jianshu.com/p/32479bdfd851)
+
+[`require()` 源码解读](http://www.ruanyifeng.com/blog/2015/05/require.html)
+
+[Promises/A+ 规范](https://www.ituring.com.cn/article/66566)
+
+[Promise](https://es6.ruanyifeng.com/#docs/promise)
+
+[`JavaScript` 专题之类型判断`(上)`](https://github.com/mqyqingfeng/Blog/issues/28)
+
+[js 判断一个 object 对象是否为空](https://blog.csdn.net/FungLeo/article/details/78113661)
+
+[原生 jsonp 具体实现](https://www.cnblogs.com/zzc5464/p/jsonp.html)
+
+[jsonp 的原理与实现](https://segmentfault.com/a/1190000007665361)
+
+[JS 事件模型](https://segmentfault.com/a/1190000006934031)
+
+[前端程序员经常忽视的一个 JavaScript 面试题](https://github.com/Wscats/articles/issues/85)
+
+[一道考察运算符优先级的 JavaScript 面试题](https://segmentfault.com/q/1010000008430170)
+
+[一道常被人轻视的前端 JS 面试题](https://www.cnblogs.com/xxcanghai/p/5189353.html)
+
+[Performance API](https://javascript.ruanyifeng.com/bom/performance.html)
+
+[ECMAScript 变量](https://www.w3school.com.cn/js/pro_js_variables.asp)
+
+[JavaScript 前端倒计时纠偏实现](https://juejin.cn/post/6844903685458231303)
+
+[进程间 8 种通信方式详解](https://blog.csdn.net/violet_echo_0908/article/details/51201278)
+
+[进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)
+
+
+
+
+
 ## 安全
 
 [前端安全系列（一）：如何防止 XSS 攻击？](https://juejin.cn/post/6844903685122703367)
@@ -508,7 +550,6 @@
 
 [Vue.js 双向绑定的实现原理](https://www.cnblogs.com/kidney/p/6052935.html?utm_source=gold_browser_extension)
 
-
 [`Object.defineProperty()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
 
 [理解 Virtual DOM](https://github.com/y8n/blog/issues/5)
@@ -516,6 +557,27 @@
 [深度剖析：如何实现一个 Virtual DOM 算法](https://github.com/livoras/blog/issues/13)
 
 [网上都说操作真实 DOM 慢，但测试结果却比 React 更快，为什么？](https://www.zhihu.com/question/31809713/answer/53544875)
+
+[vue 生命周期深入](https://juejin.cn/post/6844903602356502542)
+
+[Vue 实例](https://cn.vuejs.org/v2/guide/instance.html)
+
+[VUE 组件之间数据传递全集](https://juejin.cn/post/6844903681972781069)
+
+[做面试的不倒翁：浅谈 Vue 中 computed 实现原理](https://juejin.cn/post/6844903678533451783)
+
+[深入理解 Vue 的 watch 实现原理及其实现方式](https://juejin.cn/post/6844903605485436941)
+
+[导航守卫](https://router.vuejs.org/zh/guide/advanced/transitions.html#%E5%8D%95%E4%B8%AA%E8%B7%AF%E7%94%B1%E7%9A%84%E8%BF%87%E6%B8%A1)
+
+[Vue 面试中，经常会被问到的面试题 Vue 知识点整理](https://segmentfault.com/a/1190000016344599)
+
+[Vue2.0 v-for 中 `:key` 到底有什么用](https://www.zhihu.com/question/61064119)
+
+[vue 中 key 的作用](https://www.cnblogs.com/RainyBear/p/8563101.html)
+
+[混入](https://cn.vuejs.org/v2/guide/mixins.html)
+
 
 ## 工程化
 
@@ -536,6 +598,12 @@
 
 [一篇文章了解架构模式：MVC/MVP/MVVM](https://segmentfault.com/a/1190000015310674)
 
+[JavaScript 设计模式](https://juejin.cn/post/6844903503266054157)
+
+[JavaScript 中常见设计模式整理](https://juejin.cn/post/6844903607452581896)
+
+[观察者模式和发布订阅模式有什么不同？](https://www.zhihu.com/question/23486749)
+
 
 ## 计算机网络
 
@@ -544,3 +612,15 @@
 [URI、URL 和 URN 的区别](https://segmentfault.com/a/1190000006081973)
 
 [HTML 关于 post 和 get 的区别以及缓存问题的理解](https://blog.csdn.net/qq_27093465/article/details/50479289)
+
+[常用的几种 Content-Type](https://honglu.me/2015/07/13/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8DContent-Type/)
+
+## 性能优化
+
+[懒加载和预加载](https://juejin.cn/post/6844903614138286094)
+
+[网页图片加载优化方案](https://juejin.cn/post/6844903558865911816)
+
+[基于用户行为的图片等资源预加载](https://www.zhangxinxu.com/wordpress/2016/06/image-preload-based-on-user-behavior/)
+
+## 
