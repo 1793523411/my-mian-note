@@ -773,3 +773,40 @@
 
 [漫画：什么是 B-树？](https://mp.weixin.qq.com/s?__biz=MzI1MTIzMzI2MA==&mid=2650561220&idx=1&sn=2a6d8a0290f967027b1d54456f586405&chksm=f1feec47c689655113fa65f7911a1f59bbd994030ad685152b30e53d643049f969eefaa13058&scene=21)
 
+[漫画：什么是 B+ 树？](https://mp.weixin.qq.com/s?__biz=MzI1MTIzMzI2MA==&mid=2650561244&idx=1&sn=df3abafd3aa2f5a3abfe507bfc26982f&chksm=f1feec5fc6896549f89cbb82ee3d8010c63da76814030b285fa29322795de512ccca207064ee&scene=21)
+
+[深入浅出数据库索引原理](https://zhuanlan.zhihu.com/p/23624390)
+
+[数据库的最简单实现](http://www.ruanyifeng.com/blog/2014/07/database_implementation.html)
+
+[漫画：什么是红黑树？](https://mp.weixin.qq.com/s?__biz=MzI1MTIzMzI2MA==&mid=2650561574&idx=1&sn=edab54460a85c9686e0ec0f5d178907c&chksm=f1feeaa5c68963b3689d23db68ab14a9c50a33dd5e9244a74d7765321b42af7ec14abfadf9ac&scene=21)
+
+[漫画算法等精选文章目录](https://cloud.tencent.com/developer/article/1101517)
+
+[数据结构和算法—— Huffman 树和 Huffman 编码](https://blog.csdn.net/google19890102/article/details/54848262)
+
+[详细图解哈夫曼Huffman 编码树](https://blog.csdn.net/fx677588/article/details/70767446)
+
+[二叉树中两个节点的最近公共祖先节点](https://blog.csdn.net/xyzbaihaiping/article/details/52122885)
+
+[百度 web 前端面试题之求两个数的最大公约数和最小](https://www.cnblogs.com/cssfirefly/archive/2012/10/23/2734936.html)
+
+## js题目
+
+[JavaScript 实现超范围的数相加](https://blog.csdn.net/fe_dev/article/details/80079372)
+
+[js 实现大整数加法](https://blog.csdn.net/q1059081877q/article/details/80689194)
+
+[JavaScript 专题之数组扁平化](https://github.com/mqyqingfeng/Blog/issues/36)
+
+[JavaScript 专题之数组去重](https://github.com/mqyqingfeng/Blog/issues/27)
+
+[JavaScript 专题之如何求数组的最大值和最小值](https://github.com/mqyqingfeng/Blog/issues/35)
+
+## 算法
+
+[漫画：什么是动态规划？（整合版）](https://mp.weixin.qq.com/s?__biz=MzI1MTIzMzI2MA==&mid=2650561168&idx=1&sn=9d1c6f7ba6d651c75399c4aa5254a7d8&chksm=f1feec13c6896505f7886d9455278ad39749d377a63908c59c1fdceb11241e577ff6d66931e4&scene=21)
+
+## 智力题
+
+[经典面试智力题 200+题和解答](https://blog.csdn.net/hilyoo/article/details/4445858)
