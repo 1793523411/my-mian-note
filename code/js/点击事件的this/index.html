@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">click</button>
+    <script>
+        function doSomething() {
+            console.log(this)
+        }
+        var btn = document.querySelector('#btn')
+        console.log(btn)
+        // btn.onclick = doSomething //<button id="btn">click</button>
+        btn.onclick = function doSomething() {
+            console.log(this)
+        }
+        btn.onclick = () => {
+            console.log(this) //Window
+        }
+        doSomething() //Window
+    </script>
+</body>
+
+</html>
