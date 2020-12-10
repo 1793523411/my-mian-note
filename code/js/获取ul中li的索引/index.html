@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="test">
+        <li>one</li>
+        <li>two</li>
+        <li>three</li>
+    </ul>
+    <script>
+        var list = document.getElementById("test").getElementsByTagName("li")
+        for (var i = 0; i < 3; i++) {
+            list[i].index = i;
+            list[i].onclick = function () {
+                alert(this.index)
+            }
+        }
+
+        // for (var i = 0; i < 3; i++) {
+        //     lis[i].index = i;
+        //     lis[i].onclick = (function (a) {
+        //         return function () {
+        //             alert(a);
+        //         };
+        //     })(i);
+        // }
+    </script>
+</body>
+
+</html>
