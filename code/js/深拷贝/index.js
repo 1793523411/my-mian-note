@@ -29,3 +29,37 @@ function deepCopy(s) {
     }
     return d
 }
+
+function deepCopy(targer, cache = new Set()) {
+    if (typeof target !== 'object' || cache.has(targer)) {
+        return targer
+    }
+    if (Array.isArray(targer)) {
+        targer.map(t => {
+            cache.add(t)
+            return t
+        })
+    } else {
+        return [Object.keys(targer), ...Object.getOwnPropertySymbols(targer)].reduce((res, key) => {
+            cache.add(targer[key])
+            res[key] = deepCopy(targer[key], cache)
+            return res;
+        }, targer.constructor !== Object ? Object.create(targer.constructor.prototype) : {})
+    }
+}
+
+function deepCopyByHistory(target) {
+    const prev = history.state;
+    history.replaceState(target, document.title)
+    const res = history.state
+    history.replaceState(prev, document.title)
+    return res
+}
+
+async function deepCopyMessageChannel(target) {
+    return new Promise(reslove => {
+        const channel = new MessageChannel()
+        channel.port2.onmessage = ev => reslove(ev.data)
+        channel.port1.postMessage(target)
+    }).then(data => data)
+}
