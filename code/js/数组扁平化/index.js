@@ -23,7 +23,7 @@ function fn2(arr) {
 
 //flat
 
-arr.flat()
+arr.flat(Infinity)
 
 //扩展运算符
 
