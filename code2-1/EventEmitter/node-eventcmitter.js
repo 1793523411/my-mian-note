@@ -2,12 +2,12 @@ function EventEmitter() {
     this.events = new Map()
 }
 
-const WrapCallback = (fn, once = false) => ({ callback: fn, once });
+const WarpCallback = (fn, once = false) => ({ callback: fn, once })
 
 EventEmitter.prototype.addListener = function (type, fn, once = false) {
-    let handler = this.events.get(type);
+    let handler = this.events.get(type)
     if (!handler) {
-        this.events.set(type, WrapCallback(fn, once));
+        this.events.set(type, WarpCallback(fn.once))
     } else if (handler && typeof handler.callback == 'function') {
         this.events.set(type, [handler, WrapCallback(fn, once)])
     } else {
@@ -16,16 +16,15 @@ EventEmitter.prototype.addListener = function (type, fn, once = false) {
 }
 
 EventEmitter.prototype.removeListener = function (type, listener) {
-    let handler = this.events.get(type);
+    let handler = this.events.get(type)
     if (!handler) return;
     if (!Array.isArray(handler)) {
         if (handler.callback === listener.callback) this.events.delete(type)
-        else return
     }
     for (let i = 0; i < handler.length; i++) {
         let item = handler[i];
         if (item.callback === listener.callback) {
-            handler.splice(i, 1);
+            handler.splice(i, 1)
             i--;
             if (handler.length === 1) {
                 this.events.set(type, handler[0])
@@ -35,11 +34,11 @@ EventEmitter.prototype.removeListener = function (type, listener) {
 }
 
 EventEmitter.prototype.once = function (type, fn) {
-    this.addListener(type, fn, true);
+    this.addListener(type, fn, true)
 }
 
-EventEmitter.prototype.emit = function (types, ...args) {
-    let handler = this.events.get(type);
+EventEmitter.prototype.emit = function (type, ...args) {
+    let handler = this.events.get(type)
     if (!handler) return;
     if (Array.isArray(handler)) {
         handler.map(item => {
@@ -49,7 +48,6 @@ EventEmitter.prototype.emit = function (types, ...args) {
     } else {
         handler.callback.apply(this, args)
     }
-    return true
 }
 
 EventEmitter.prototype.removeAllListener = function (type) {

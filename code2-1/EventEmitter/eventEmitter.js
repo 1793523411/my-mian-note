@@ -1,42 +1,36 @@
-
 function EventEmitter() {
     this.__events = {}
 }
 
-EventEmitter.VERSION = '1.0.0'
+EventEmitter.VERSON = '1.0.0'
 
 EventEmitter.prototype.on = function (eventName, listener) {
     if (!eventName || !listener) return;
-    // 判断回调的 listener 是否为函数
     if (!isValidListener(listener)) {
-        throw new TypeError('listener must be a function');
+        throw new TypeError('liten mush be a function')
     }
     var events = this.__events;
-    var listeners = events[eventName] = events[eventName] || [];
-    var listenerIsWrapped = typeof listener === 'object';
-    // 不重复添加事件，判断是否有一样的
+    var listeners = events[eventName] = events[eventName] || []
+    var listenerIWrapper = typeof listener === 'object';
     if (indexOf(listeners, listener) === -1) {
-        listeners.push(listenerIsWrapped ? listener : {
-            listener: listener,
-            once: false
-        });
+        listeners.push(listenerIWrapper
+            ? listener
+            : {
+                listener: listener,
+                once: false
+            })
     }
-    // this.__events[eventName] = listeners
-    return this;
-};
-
-function isValidListener(listener) {
-    if (typeof listener === 'function') {
-        return true;
-    } else if (listener && typeof listener === 'object') {
-        return isValidListener(listener.listener);
-    } else {
-        return false;
-    }
+    return this
 }
 
-function indexOf(array, item) {
-    var result = -1
+function isValidListener(listener) {
+    if (typeof listener === "function") return true;
+    else if (listener && typeof listener === "object") return isValidListener(listener.listener);
+    else return false
+}
+
+function indexOf() {
+    var result = -1;
     item = typeof item === 'object' ? item.listener : item;
     for (var i = 0, len = array.length; i < len; i++) {
         if (array[i].listener === item) {
@@ -44,14 +38,14 @@ function indexOf(array, item) {
             break;
         }
     }
-    return result;
+    return result
 }
 
 EventEmitter.prototype.emit = function (eventName, args) {
     let listeners = this.__events[eventName];
-    if (!listeners) return;
+    if (!listeners) return
     for (let i = 0; i < listeners.length; i++) {
-        let listener = listeners[i]
+        let listener = listeners[i];
         if (listener) {
             listener.listener.apply(this, args || [])
             if (listener.once) {
@@ -59,7 +53,6 @@ EventEmitter.prototype.emit = function (eventName, args) {
             }
         }
     }
-    return this
 }
 
 EventEmitter.prototype.off = function (eventName, listener) {
@@ -72,10 +65,9 @@ EventEmitter.prototype.off = function (eventName, listener) {
             break;
         }
     }
-    if (typeof index !== "undefined") {
+    if (typeof index !== 'undefined') {
         listeners.splice(index, 1, null)
     }
-
 }
 
 EventEmitter.prototype.once = function (eventName, listener) {
