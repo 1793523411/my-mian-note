@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="ul">
+        <li>aaaaaaaa</li>
+        <li>事件委托了 点击当前，如何获取 这个点击的下标</li>
+        <li>cccccccc</li>
+    </ul>
+    <script>
+        // window.onload = function () {
+        //     let oUl = document.getElementById('ul');
+        //     let aLl = document.getElementsByTagName('li');
+        //     oUl.onclick = function (ev) {
+
+        //         ev = ev || window.event;
+        //         let target = ev.target || ev.srcElement;
+        //         console.log(ev.target)
+        //         console.log(ev.srcElement)
+        //         console.log(window.target)
+        //     }
+        // }
+        let _this = this
+        document.getElementById('ul').addEventListener('click', function (e) { console.log(this === _this); console.log(this); console.log(e) })
+    </script>
+</body>
+
+</html>
