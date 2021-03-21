@@ -58,14 +58,103 @@ class BinarySearchTree {
         }
     }
 
-    preOrderTraverseByStack() { }
-    inOrderTraverseByStack() { }
-    postOrderTraverseByStack() { }
+    preOrderTraverseByStack() {
+        let stack = []
+        stack.push(this.root)
+        while (stack.length > 0) {
+            let node = stack.pop();
+            node.show();
+            if (node.left) stack.push(node.left)
+            if (node.right) stack.push(node.right)
+        }
+    }
+    inOrderTraverseByStack() {
+        let stack = [];
+        node = this.root;
+        while (stack.length > 0 || node) {
+            if (node.left) {
+                stack.push(node);
+                node = node.left
+            } else {
+                node = stack.pop();
+                node.show()
+                node = node.right
+            }
+        }
+    }
+    postOrderTraverseByStack() {
+        let stack1 = [];
+        let stack2 = [];
+        stack1.push(this.root)
+        while (stack1.length > 0) {
+            node = stack1.pop();
+            stack2.push(node);
+            if (node.left) stack1.push(node.left)
+            if (node.right) stack1.push(node.right)
+        }
+        while (stack2.length > 0) {
+            node = stack2.pop()
+            node.show()
+        }
+    }
 
-    findMinNode(root) { }
-    findMaxNode(root) { }
+    findMinNode(root) {
+        let node = root;
+        while (node && node.left) {
+            node = node.left
+        }
+        return node;
+    }
+    findMaxNode(root) {
+        let node = root;
+        while (node && node.right) {
+            node = node.right;
+        }
+        return node
+    }
     find(value) { }
-    findNode(value) { }
-    remove(value) { }
-    removeNode(value) { }
+    findNode(node, value) {
+        if (node === null) {
+            return node
+        }
+        while (node) {
+            if (node === null) return -1
+            if (value > node.value) {
+                node = node.right
+            } else if (value < node.value) {
+                node = node.left
+            } else {
+                return node
+            }
+        }
+    }
+    remove(value) {
+        this.removeNode(this.root, value)
+    }
+    removeNode(node, value) {
+        while (node) {
+            if (node === null) return -1;
+            if (value > node.value) {
+                node = node.right
+            } else if (value < node.value) {
+                node = node.left
+            } else {
+                if (node.left === null && node.right === null) {
+                    node = null;
+                    return node
+                } else if (node.left === null) {
+                    node = node.right;
+                    return node
+                } else if (node.right === null) {
+                    node = node.left;
+                    return node
+                } else {
+                    let tmp = this.findMinNode(node.right);
+                    node.value = tmp.value;
+                    this.removeNode(node.right, tmp)
+                    return node
+                }
+            }
+        }
+    }
 }
