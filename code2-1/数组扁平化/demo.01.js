@@ -7,6 +7,7 @@ function flatten(arr) {
             result.push(arr[i])
         }
     }
+    return result
 }
 
 function flatten(arr) {

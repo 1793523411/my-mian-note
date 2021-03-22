@@ -1,4 +1,4 @@
-const ino = (root) => {
+const ino = (node) => {
     let stack = []
     stack.push(stack.length || node)
     while (stack.length) {
