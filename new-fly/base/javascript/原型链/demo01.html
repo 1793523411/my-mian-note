@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Person() {
+            this.age = 11
+        }
+        var person = new Person();
+        person.name = 'aaa';
+        Person.prototype.name = 'bbb'
+        // console.log(Object.getPrototypeOf(person) === Person.prototype)//true
+        // console.log(Object.getPrototypeOf(Person.prototype) === Object.prototype)//true
+        // console.log(Object.getPrototypeOf(Object.prototype))//null
+        // console.log(person.name)
+
+        //for in 
+
+        // for (let item in person) {
+        //     console.log(person[item])
+        // }
+
+        for (let [item, index] of Object.entries(person)) {
+            console.log(item)
+            console.log(index)
+        }
+
+        let sign = person.hasOwnProperty("name")
+        console.log(sign)
+        console.log(Object.getOwnPropertyNames(person))
+    </script>
+</body>
+
+</html>

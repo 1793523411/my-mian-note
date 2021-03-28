@@ -31,3 +31,7 @@ console.log(instance1.color)
 let instance2 = new SubType("ygj222",22)
 console.log(instance2.color)
 
+// instance1.sayName()
+instance1.sayage()
+// instance2.sayName()
+
