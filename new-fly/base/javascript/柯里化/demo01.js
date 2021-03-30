@@ -1,3 +1,5 @@
+//柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术
+
 let curry = function (fn) {
     let args = Array.prototype.slice.call(arguments, 1)
 
@@ -14,10 +16,12 @@ function add(a, b) {
 
 var addCurry = curry(add, 1, 2);
 console.log(addCurry())
-addCurry() // 3
+// addCurry() // 3
 //或者
 var addCurry = curry(add, 1);
-addCurry(2) // 3
+console.log(addCurry(2))
+// addCurry(2) // 3
 //或者
 var addCurry = curry(add);
-addCurry(1, 2) // 3
+console.log(addCurry(1,2))
+// addCurry(1, 2) // 3

@@ -20,14 +20,17 @@
 
 [柯里化](https://github.com/mqyqingfeng/Blog/issues/42)
 
-[v8 垃圾回收机制]()
+[v8 垃圾回收机制](https://juejin.cn/post/6844904016325902344)
 
-[浮点数精度]()
+[浮点数精度](https://github.com/mqyqingfeng/Blog/issues/155)
+[1.0+0.2 的问题](http://vhblog.ygjie.icu/zh/essay/02/#_0-1-0-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%AD%89%E4%BA%8E-0-3)
 
-[new 操作符]()
+**[几道面试题](https://github.com/mqyqingfeng/frontend-interview-question-and-answer/issues/30)**
 
-[事件循环机制]()
+[new 操作符](https://github.com/mqyqingfeng/Blog/issues/13)
 
-[promise 原理]()
+[事件循环机制](https://zhuanlan.zhihu.com/p/33058983)
 
-[generator 原理]()
+[promise 原理](https://juejin.cn/post/6844904063570542599#heading-6)
+
+[generator 原理](http://www.alloyteam.com/2016/02/generators-in-depth/)
