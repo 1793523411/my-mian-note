@@ -97,11 +97,42 @@ Promise.prototype.then = function (onResolved, onRejected) {
 function resolvePromise(promise2, x, resolve, reject) {
     var then;
     var thenCalledOrThrow = false;
-    if(promise2 === x){
+    if (promise2 === x) {
         return reject(new TypeError('Chaning cycle detected for promise'))
     }
-    if(x instanceof Promise){
-        if(x.status === '')
+    if (x instanceof Promise) {
+        if (x.status === 'pending') {
+            x.then(function (v) {
+                resolvePromise(promise2, v, resolve, reject)
+            }, reject)
+        } else {
+            x.then(resolve, reject)
+        }
+        return
+    }
+    if ((x !== null) && ((typeof x === "object") || (typeof x === "function"))) {
+        try {
+            then = x.then
+            if (typeof then === 'function') {
+                then.call(x, function rs(y) {
+                    if (thenCalledOrThrow) return
+                    thenCalledOrThrow = true
+                    return resolvePromise(promise2, y, resolve, reject)
+                }, function rj(r) {
+                    if (thenCalledOrThrow) return
+                    thenCalledOrThrow = true
+                    return reject(r)
+                })
+            } else {
+                resolve(x)
+            }
+        } catch (e) {
+            if (thenCalledOrThrow) return
+            thenCalledOrThrow = true
+            return reject(e)
+        }
+    } else {
+        resolve(x)
     }
 }
 
