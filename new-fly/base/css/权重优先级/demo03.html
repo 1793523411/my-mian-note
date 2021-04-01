@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 权重值：201 */
+        #box #box2 p {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+        }
+
+        /* 权重值：201,离目标最近 */
+        #box #box3 p {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 同等权重下,靠近目标的优先 -->
+    <div id="box" class="boxs">
+        <div id="box2" class="boxs2">
+            <div id="box3" class="boxs3">
+                <p></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
