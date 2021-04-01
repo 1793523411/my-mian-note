@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">send</button>
+    <script>
+        let childWins = [];
+        document.getElementById('btn').addEventListener('click', function () {
+            const win = window.open('./demo06.html');
+            childWins.push(win);
+        });
+        childWins = childWins.filter(w => !w.closed);
+        if (childWins.length > 0) {
+            // mydata.fromOpenner = false;
+            childWins.forEach(w => w.postMessage("ygj222"));
+        }
+        if (window.opener && !window.opener.closed) {
+            // mydata.fromOpenner = true;
+            window.opener.postMessage("ygj");
+        }
+
+        window.addEventListener('message', function (e) {
+            const data = e.data;
+            const text = '[receive] ' + data + ' —— tab ' + data.from;
+            console.log('[Cross-document Messaging] receive message:', text);
+            // 避免消息回传
+            if (window.opener && !window.opener.closed && data.fromOpenner) {
+                window.opener.postMessage(data);
+            }
+            // 过滤掉已经关闭的窗口
+            childWins = childWins.filter(w => !w.closed);
+            // 避免消息回传
+            if (childWins && !data.fromOpenner) {
+                childWins.forEach(w => w.postMessage(data));
+            }
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function openStore() {
+            const storeName = 'ctc_aleinzhou';
+            return new Promise(function (resolve, reject) {
+                if (!('indexedDB' in window)) {
+                    return reject('don\'t support indexedDB');
+                }
+                const request = indexedDB.open('CTC_DB', 1);
+                request.onerror = reject;
+                request.onsuccess = e => resolve(e.target.result);
+                request.onupgradeneeded = function (e) {
+                    const db = e.srcElement.result;
+                    if (e.oldVersion === 0 && !db.objectStoreNames.contains(storeName)) {
+                        const store = db.createObjectStore(storeName, { keyPath: 'tag' });
+                        store.createIndex(storeName + 'Index', 'tag', { unique: false });
+                    }
+                }
+            });
+        }
+        function saveData(db, data) {
+            return new Promise(function (resolve, reject) {
+                const STORE_NAME = 'ctc_aleinzhou';
+                const tx = db.transaction(STORE_NAME, 'readwrite');
+                const store = tx.objectStore(STORE_NAME);
+                const request = store.put({ tag: 'ctc_data', data });
+                request.onsuccess = () => resolve(db);
+                request.onerror = reject;
+            });
+        }
+
+        function query(db) {
+            const STORE_NAME = 'ctc_aleinzhou';
+            return new Promise(function (resolve, reject) {
+                try {
+                    const tx = db.transaction(STORE_NAME, 'readonly');
+                    const store = tx.objectStore(STORE_NAME);
+                    const dbRequest = store.get('ctc_data');
+                    dbRequest.onsuccess = e => resolve(e.target.result);
+                    dbRequest.onerror = reject;
+                }
+                catch (err) {
+                    reject(err);
+                }
+            });
+        }
+
+        openStore().then(db => saveData(db, null))
+
+        openStore().then(db => saveData(db, null)).then(function (db) {
+            setInterval(function () {
+                query(db).then(function (res) {
+                    if (!res || !res.data) {
+                        return;
+                    }
+                    const data = res.data;
+                    const text = '[receive] ' + res.data + ' —— tab ' + data.from;
+                    console.log('[Storage I] receive message:', text);
+                });
+            }, 1000);
+        });
+
+        openStore().then(db => saveData(db, null)).then(function (db) {
+            // …… 省略上面的轮询代码
+            // 触发 saveData 的方法可以放在用户操作的事件监听内
+            saveData(db, "ygj");
+        });
+
+    </script>
+</body>
+
+</html>

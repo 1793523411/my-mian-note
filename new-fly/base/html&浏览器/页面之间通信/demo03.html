@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>send</button>
+    <button>delete</button>
+    <script>
+        window.addEventListener('storage', function (e) {
+            console.log(e)
+            if (e.key === 'ctc-msg') {
+                const data = JSON.parse(e.newValue);
+                const text = '[receive] ' + e.newValue + ' —— tab ' + data.from;
+                console.log('[Storage I] receive message:', text);
+            }
+        });
+        let btn = document.querySelector("button")
+        let btn2 = document.querySelectorAll("button")[1]
+        btn.addEventListener('click', () => {
+            window.localStorage.setItem('ctc-msg', JSON.stringify("111"));
+        })
+        btn2.addEventListener('click', () => {
+            window.localStorage.removeItem('ctc-msg');
+        })
+        // mydata.st = +(new Date);
+
+    </script>
+</body>
+
+</html>

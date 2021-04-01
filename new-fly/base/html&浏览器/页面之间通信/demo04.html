@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>send</button>
+    <script>
+        const sharedWorker = new SharedWorker('./util.shared.js', 'ctc');
+        setInterval(function () {
+            sharedWorker.port.postMessage({ get: true });
+        }, 1000);
+
+        // 监听 get 消息的返回数据
+        sharedWorker.port.addEventListener('message', (e) => {
+            console.log(e)
+            const data = e.data;
+            const text = '[receive] ' + e.data + ' —— tab ' + data.from;
+            console.log('[Shared Worker] receive message:', text);
+        }, false);
+        sharedWorker.port.start();
+        let btn = document.querySelector("button")
+        btn.addEventListener('click', () => {
+            sharedWorker.port.postMessage("hello");
+            console.log('send hello')
+        })
+        // window.addEventListener('storage', function (e) {
+        //     console.log(e)
+        //     if (e.key === 'ctc-msg') {
+        //         const data = JSON.parse(e.newValue);
+        //         const text = '[receive] ' + e.newValue + ' —— tab ' + data.from;
+        //         console.log('[Storage I] receive message:', text);
+        //     }
+        // });
+    </script>
+</body>
+
+</html>
