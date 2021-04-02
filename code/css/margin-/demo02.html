@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>margin不同赋值情况（负值，百分数）</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*父元素样式*/
+        .p {
+            margin: 100px;
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+        }
+
+        .c1 {
+            width: 200px;
+            height: 200px;
+            border: 1px solid blue;
+            /*margin-left为负值像素，偏移值相对于自身，其后元素不受影响*/
+            margin-left: -20px;
+        }
+
+        .c2 {
+            width: 200px;
+            height: 200px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="p">
+        <div class="c1">
+            子元素1
+        </div>
+        <div class="c2">
+            子元素2（子元素2不受影响）
+        </div>
+    </div>
+</body>
+
+</html>
