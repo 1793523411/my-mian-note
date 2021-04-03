@@ -65,7 +65,7 @@ function createStore(reducer, preloadedState, enhancer) {
 
     function replaceReducer() {
         currentReducer = nextListeners;
-        dispatch({ typeof: ActionTypes.REPLACE })
+        dispatch({ type: ActionTypes.REPLACE })
         return store
     }
 

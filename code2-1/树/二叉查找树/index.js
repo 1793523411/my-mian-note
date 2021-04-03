@@ -72,7 +72,7 @@ class BinarySearchTree {
         let stack = [];
         node = this.root;
         while (stack.length > 0 || node) {
-            if (node.left) {
+            if (node) {
                 stack.push(node);
                 node = node.left
             } else {

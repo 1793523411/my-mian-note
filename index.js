@@ -151,7 +151,8 @@ const other = [
     '白屏优化',
     '讲一下微前端',
     '优化动画',
-    '讲一下ICE'
+    '讲一下ICE',
+    'axios原理'
 ]
 
 const handle = [
@@ -206,6 +207,7 @@ const nodejs = [
 
 let res = []
 let obj = {}
+let str = ""
 
 function mypush(arr, num) {
     let sign;
@@ -232,10 +234,14 @@ let leetcode2 = Math.floor(Math.random() * 66 + 3)
 
 for (let i = 0; i < res.length; i++) {
     obj[i + 1] = res[i]
+    str += `${i + 1} : ${res[i]}\n`
 }
 
-obj["leetcode(hard忽略)"] = [leetcode1,leetcode2]
+obj["leetcode(hard忽略)"] = [leetcode1, leetcode2]
 
-console.log(JSON.parse( JSON.stringify(obj,null,4)))
+str += `leetcode(hard忽略) : ${leetcode1} , ${leetcode2}`
+
+console.log(JSON.parse(JSON.stringify(obj, null, 4)))
+console.log(str)
 
 // https://1351581254124810.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/ServerlessLoveStory/mian/
