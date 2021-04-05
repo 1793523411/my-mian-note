@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="#/home">home</a></li>
+        <li><a href="#/about">abot</a></li>
+    </ul>
+    <div id="roterView"></div>
+    <script>
+        window.addEventListener('DOMContentLoaded', onLoad)
+        window.addEventListener('hashchange', onHashChange)
+
+        var routerView = null;
+        function onLoad() {
+            routerView = document.querySelector('#roterView')
+            console.log(routerView)
+            onHashChange()
+        }
+
+        function onHashChange() {
+            switch (location.hash) {
+                case '#/home':
+                    routerView.innerHTML = 'Home'
+                    return
+                case '#/about':
+                    routerView.innerHTML = 'About'
+                    return
+                default:
+                    return
+            }
+        }
+    </script>
+</body>
+
+</html>

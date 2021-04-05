@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <p><button class="back">back</button></p>
+            <p><button class="go">go</button></p>
+            <p><button class="pushstate">pushState</button></p>
+            <p><button class="replacestate">replaceState</button></p>
+        </nav>
+        <div id="app">
+            <p class="current">当前URL：<span></span></p>
+            <p class="history-len">历史记录的长度：<span></span></p>
+        </div>
+    </div>
+    <script>
+        class HistoryRouter {
+            currentUrl = '';
+            handlers = {};
+
+            constructor() {
+                this.refresh = this.refresh.bind(this);
+                this.addStateListener();
+                window.addEventListener('load', this.refresh, false);
+                window.addEventListener('popstate', this.refresh, false);
+                window.addEventListener('pushState', this.refresh, false);
+                window.addEventListener('replaceState', this.refresh, false);
+            }
+            addStateListener() {
+                const listener = function (type) {
+                    var orig = history[type];
+                    return function () {
+                        var rv = orig.apply(this, arguments);
+                        var e = new Event(type);
+                        e.arguments = arguments;
+                        window.dispatchEvent(e);
+                        return rv;
+                    };
+                };
+                window.history.pushState = listener('pushState');
+                window.history.replaceState = listener('replaceState');
+            }
+            refresh(event) {
+                this.currentUrl = location.pathname;
+                this.emit('change', location.pathname);
+                document.querySelector('#app span').innerHTML = location.pathname;
+            }
+            on(evName, listener) {
+                this.handlers[evName] = listener;
+            }
+            emit(evName, ...args) {
+                const handler = this.handlers[evName];
+                if (handler) {
+                    handler(...args);
+                }
+            }
+        }
+        const router = new HistoryRouter();
+        router.on('change', function (curUrl) {
+            console.log(curUrl);
+            document.querySelector('.current span').innerHTML = curUrl;
+            document.querySelector('.history-len span').innerHTML = history.length;
+        });
+    </script>
+</body>
+
+</html>
