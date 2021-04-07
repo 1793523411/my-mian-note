@@ -8,6 +8,7 @@ const html_Brower =
         '浏览器存储',
         '事件模型',
         '行内元素和块级元素',
+        'a标签作用',
         'url输入发生了啥',
         '浏览器工作原理',
         '内存泄漏',
@@ -20,6 +21,7 @@ const html_Brower =
 
 const css = [
     '盒模型',
+    '元素种类',
     '边距重叠',
     'BFC·····',
     '选择器',
@@ -71,6 +73,7 @@ const javascript = [
     'es6-迭代器',
     'es6-生成器',
     'es6-proxy',
+    'es6-symbol',
     'es6-异步解决方案',
     'es6-class',
     'es6-模块加载',
