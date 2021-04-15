@@ -1,22 +1,27 @@
-const arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-
-console.log(arr)
-
-function bubbleSort(arr) {
-    if (!Array.isArray(arr) || arr.length < 1) return
-    let sign;
-    for (let i = 0; i < arr.length; i++) {
-        sign = true
-        for (let j = 0; j < arr.length - i; j++) {
-            if (arr[j] > arr[j+1]) {
-                [arr[j+1], arr[j]] = [arr[j], arr[j+1]]
-                sign = false
-            }
+const singlePipe = function (promiseFunc) {
+    let sign = false;
+    
+    async function work(...arg) {
+        if (!sign) {
+            sign = true
+            let res = await promiseFunc(...arg)
+            return res
         }
-        if (sign) break
+        sign = false
+        return ""
     }
-}
+    return work
+};
+// 测试
+var promiseFunc = function (data) {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(data), 1000);
+    });
+};
 
-bubbleSort(arr)
-
-console.log(arr)
+var request = singlePipe(promiseFunc);
+request(1).then((data) => console.log("1:", data)); // 1
+request(2).then((data) => console.log(data)); // 无反应
+setTimeout(() => {
+    request(3).then((data) => console.log("3:", data)); // 3
+}, 2000);

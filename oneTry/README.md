@@ -46,12 +46,19 @@
 
 ### 中等
 
-[二维数组中的查找]()
+[二维数组中的查找](https://github.com/1793523411/my-mian-note/issues/12)
 
 ## 手写题
 
 [bind ,call, applyss](https://github.com/1793523411/my-mian-note/issues/13)
 
-[数组扁平化]
+[数组扁平化](https://github.com/1793523411/my-mian-note/issues/14)
+
+[排序](https://github.com/1793523411/my-mian-note/issues/15)
+
+[防抖与节流](https://github.com/1793523411/my-mian-note/issues/16)
+
+[避免重复请求]()
+
 
 ## nodejs
