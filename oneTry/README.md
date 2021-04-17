@@ -20,6 +20,10 @@
 
 [常见的DOM操作](https://github.com/1793523411/my-mian-note/issues/10)
 
+[扫码登录流程 ](https://github.com/1793523411/my-mian-note/issues/21)
+
+[讲一下token](https://github.com/1793523411/my-mian-note/issues/22)
+
 ## 浏览器
 
 ## css
@@ -48,6 +52,8 @@
 
 [二维数组中的查找](https://github.com/1793523411/my-mian-note/issues/12)
 
+[字符串的排列](https://github.com/1793523411/my-mian-note/issues/19)
+
 ## 手写题
 
 [bind ,call, applyss](https://github.com/1793523411/my-mian-note/issues/13)
@@ -58,7 +64,10 @@
 
 [防抖与节流](https://github.com/1793523411/my-mian-note/issues/16)
 
-[避免重复请求]()
+[避免重复请求](https://github.com/1793523411/my-mian-note/issues/17)
 
+[简易版微博](https://github.com/1793523411/my-mian-note/issues/18)
+
+[每隔一定时间打印数字 && sleep ](https://github.com/1793523411/my-mian-note/issues/20)
 
 ## nodejs
