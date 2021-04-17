@@ -1,135 +1,418 @@
-## 关于 token
+## 一些经典的手写题
 
-Token 是在服务端产生的。如果前端使用用户名/密码向服务端请求认证，服务端认证成功，那么在服务端会返回 Token 给前端。前端可以在每次请求的时候带上 Token 证明自己的合法地位。如果这个 Token 在服务端持久化（比如存入数据库），那它就是一个永久的身份令牌
+### 深拷贝和浅拷贝
 
-### token 的有效期与用户体验
-
-token 的有效期如果很短，那过期就要求重新登录，用户体验会很差
-
-为了解决在操作过程不能让用户感到 Token 失效这个问题，有一种方案是在服务器端保存 Token 状态，用户每次操作都会自动刷新（推迟） Token 的过期时间——Session 就是采用这种策略来保持用户登录状态的。然而仍然存在这样一个问题，在前后端分离、单页 App 这些情况下，每秒种可能发起很多次请求，每次都去刷新过期时间会产生非常大的代价。如果 Token 的过期时间被持久化到数据库或文件，代价就更大了。所以通常为了提升效率，减少消耗，会把 Token 的过期时保存在缓存或者内存中
-
-还有另一种方案，使用 Refresh Token，它可以避免频繁的读写操作。这种方案中，服务端不需要刷新 Token 的过期时间，一旦 Token 过期，就反馈给前端，前端使用 Refresh Token 申请一个全新 Token 继续使用。这种方案中，服务端只需要在客户端请求更新 Token 的时候对 Refresh Token 的有效性进行一次检查，大大减少了更新有效期的操作，也就避免了频繁读写。当然 Refresh Token 也是有有效期的，但是这个有效期就可以长一点了，比如，以天为单位的时间
-
-**登录**
-
-![](https://user-gold-cdn.xitu.io/2018/1/27/161375750d33b4cd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
-
-**业务请求**
-
-![](https://user-gold-cdn.xitu.io/2018/1/27/161375750d5aa746?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
-
-**Token 过期，刷新 Token**
-
-![](https://user-gold-cdn.xitu.io/2018/1/27/161375750d060f97?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
-
-Refresh Token 过期怎么办? Refresh Token 既然已经过期，就该要求用户重新登录了
-
-当然还可以把这个机制设计得更复杂一些，比如，Refresh Token 每次使用的时候，都更新它的过期时间，直到与它的创建时间相比，已经超过了非常长的一段时间（比如三个月），这等于是在相当长一段时间内允许 Refresh Token 自动续期
-
-### 无状态 Token
-
-如果我们把所有状态信息都附加在 Token 上，服务器就可以不保存,不过只要服务端能确认是自己签发的 Token，而且其信息未被改动过，那就可以认为 Token 有效——“签名”可以作此保证,jwt 可以用来做到这一点
-
-不过在使用无状态 Token 的时候在服务端会有一些变化，服务端虽然不保存有效的 Token 了，却需要保存未到期却已注销的 Token。如果一个 Token 未到期就被用户主动注销，那么服务器需要保存这个被注销的 Token，以便下次收到使用这个仍在有效期内的 Token 时判其无效
-
-在前端可控的情况下（比如前端和服务端在同一个项目组内），可以协商：前端一但注销成功，就丢掉本地保存（比如保存在内存、LocalStorage 等）的 Token 和 Refresh Token。基于这样的约定，服务器就可以假设收到的 Token 一定是没注销的（因为注销之后前端就不会再使用了）。
-
-如果前端不可控的情况，仍然可以进行上面的假设，但是这种情况下，需要尽量缩短 Token 的有效期，而且必须在用户主动注销的情况下让 Refresh Token 无效。这个操作存在一定的安全漏洞，因为用户会认为已经注销了，实际上在较短的一段时间内并没有注销。如果应用设计中，这点漏洞并不会造成什么损失，那采用这种策略就是可行的。
-
-在使用无状态 Token 的时候，有两点需要注意：
-
-- Refresh Token 有效时间较长，所以它应该在服务器端有状态，以增强安全性，确保用户注销时可控
-- 应该考虑使用二次认证来增强敏感操作的安全性
-
-### 分离认证服务
-
-当 Token 无状态之后，单点登录就变得容易了。前端拿到一个有效的 Token，它就可以在任何同一体系的服务上认证通过——只要它们使用同样的密钥和算法来认证 Token 的有效性
-
-虽然认证和业务分离了，实际并没产生多大的差异。当然，这是建立在认证服务器信任业务服务器的前提下，因为认证服务器产生 Token 的密钥和业务服务器认证 Token 的密钥和算法相同。换句话说，业务服务器同样可以创建有效的 Token
-
-### 不受信的业务服务器
-
-遇到不受信的业务服务器时，很容易想到的办法是使用不同的密钥。认证服务器使用密钥 1 签发，业务服务器使用密钥 2 验证——这是典型非对称加密签名的应用场景。认证服务器自己使用私钥对 Token 签名，公开公钥。信任这个认证服务器的业务服务器保存公钥，用于验证签名。幸好，JWT 不仅可以使用 HMAC 签名，也可以使用 RSA（一种非对称加密算法）签名
-
-不过，当业务服务器已经不受信任的时候，多个业务服务器之间使用相同的 Token 对用户来说是不安全的。因为任何一个服务器拿到 Token 都可以仿冒用户去另一个服务器处理业务……悲剧随时可能发生。
-
-为了防止这种情况发生，就需要在认证服务器产生 Token 的时候，把使用该 Token 的业务服务器的信息记录在 Token 中，这样当另一个业务服务器拿到这个 Token 的时候，发现它并不是自己应该验证的 Token，就可以直接拒绝。
-
-### JWT Token
-
-JWT 主要由三部分组成：
-
-- 头部（header）
-- 载荷（payload）
-- 签证（sign）
-
-JWT 的头部主要由两部分信息组成：
-
-- 声明类型，这里上 jwt
-- 声明加密算法，如：HMAC、SHA256、HS256
+**浅拷贝**
 
 ```js
-{
-	"typ": "JWT",
-	"alg": "HS256"
+const shallowClone = (arr) => {
+  let res = Array.isArray(arr) ? [] : {};
+  for (let [key, value] of Object.entries(arr)) {
+    res[key] = value;
+  }
+  return res;
+};
+```
+
+**深拷贝**
+
+```js
+const deepClone = (arr, map = new WeakMap()) => {
+  if (arr.constructor === Date) return new Date(arr);
+  if (arr.constructor === RegExp) return new RegExp(arr);
+  let res = Object.create(
+    Object.getPrototypeOf(arr),
+    Object.getOwnPropertyDescriptors(arr)
+  );
+  if (map.has(arr)) return map.get(arr);
+  map.set(arr, res);
+  for (let item of Reflect.ownKeys(arr)) {
+    if (typeof arr[item] === "object") {
+      res[item] = deepClone(arr[item], map);
+    } else {
+      res[item] = arr[item];
+    }
+  }
+  return res;
+};
+```
+
+### 数组扁平化
+
+```js
+const myFlat = (arr) => {
+  let res = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      res = res.concat(myFlat(arr[i]));
+    } else {
+      res.push(arr[i]);
+    }
+  }
+  return res;
+};
+```
+
+### 数组去重
+
+```js
+const dedupe = (arr, handler) => {
+  let clone = [];
+  let lookup = {};
+  handler = handler || JSON.stringify;
+  for (let i = 0; i < arr.length; i++) {
+    let tmp = handler(arr[i]);
+
+    if (!lookup[tmp]) {
+      clone.push(arr[i]);
+      lookup[tmp] = true;
+    }
+  }
+  return clone;
+};
+```
+
+### bind,call,apply
+
+```js
+Function.prototype.myCall = function (ctx, ...args) {
+  ctx = ctx || window;
+  let fn = this;
+  ctx.fn = fn;
+  let res = eval("ctx.fn(...args)");
+  delete ctx.fn;
+  return res;
+};
+
+Function.prototype.myApply = function (ctx, ...args) {
+  ctx = ctx || window;
+  let fn = this;
+  ctx.fn = fn;
+  let res = eval("ctx.fn(args)");
+  delete ctx.fn;
+  return res;
+};
+
+Function.prototype.myBind = function (ctx, ...args) {
+  let that = this;
+  let func = function () {
+    let arg = args.concat(Array.prototype.slice.call(arguments));
+    that.apply(ctx, arg);
+  };
+  return func;
+};
+```
+
+### 手写遍历器
+
+```js
+function iterator(arr) {
+  let index = 0;
+  return {
+    next: function () {
+      return index > arr.length
+        ? {
+            val: undefined,
+            done: true,
+          }
+        : {
+            val: arr[index++],
+            done: false,
+          };
+    },
+  };
 }
 ```
 
-将这个头部信息使用 base64 加密，就得到了 JWT 的第一部分信息了：
-
-```
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
-```
-
-载荷（payload）主要有三部分组成：标准中注册的声明、公共的声明、私有的声明。
-
-标准中注册的声明：
-
-- iss：jwt 签发者
-- sub：jwt 所面向的用户
-- aud：接收 jwt 的一方
-- exp：jwt 的过期时间，这个过期时间必须大于签发时间
-- nbf：定义在什么时间之前，该 token 都是不可用的
-- iat：jwt 的签发时间
-- jti：jwt 的唯一身份标识，避免重复
-
-自定义的声明:用户自己添加的一些信息，比如用户姓名、手机号等一些不敏感信息
+### 二分查找
 
 ```js
-{
- "iss": 'jwt'
- "sub": "13011912019",
- "exp": "1530000000",
- "iat": "1529000000",
- "jti": "638069ab7a97771edcb91180f491d01e",
- "nickname": "kafei",
- "avatar": "http://oy98jbaeo.bkt.clouddn.com/avatar-1532401501"
+function binchSearch(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor(left + (right - left) / 2);
+    if (arr[mid] > target) right = mid - 1;
+    else if (arr[mid] < target) left = mid + 1;
+    else return mid;
+  }
+  return -1;
 }
 ```
 
-继续将这个载荷（payload）信息使用 base64 加密，就得到了我们 JWT 的第二部分信息
+### 手写 Instanceof
 
-将 Header 和 Playload 拼接生成一个字符串 str=(Header.Playload),使用加密算法和我们提供的密钥（secret,服务器自己提供的一个字符串）对 str 进行加密生成最终的 JWT
+```js
+function myInstance(left, right) {
+  if (typeof left !== "object" || typeof obj !== null) return false;
+  let L = Object.getPrototypeOf(left);
+  let R = right.__proto__;
+  while (true) {
+    if (L === null) return false;
+    if (L === R) return true;
+    L = Object.prototype(L);
+  }
+}
+```
 
-最后，我们将这三部分连接起来，就是我们需要的 JWT 了
+### 防抖节流
 
-### SSL 为什么设置有效期
+防抖
 
-最重要的原因在于吊销。当网站的私钥丢失时，网站应该向证书颁发机构（CA）申请将他们的证书加入到证书吊销列表（CRL）里。当用户访问 https 站点时，浏览器会自动向 CA 请求吊销列表，如果用户访问的站点提供的证书在 CRL 里，浏览器就不信任这个证书，因为攻击者可能拥有同样的证书。
+```js
+const debounce = (func, wait = 0) => {
+  let time = null;
+  let arg = [];
+  function debounced(...args) {
+    if (time) {
+      clearTimeout(time);
+      time = null;
+    }
+    arg = args;
+    return new Promise((resolve, reject) => {
+      time = setTimeout(async () => {
+        try {
+          let res = await func.apply(this, ...arg);
+          resolve(res);
+        } catch (e) {
+          reject(e);
+        }
+      }, wait);
+    });
+  }
 
-所以如果证书永久有效，随着越来越多的私钥丢失，吊销列表也越来越大（因为只有加进去的，没有剔出去的），这既给 CA 增加流量压力，也会增加浏览器的流量。而一旦有效期只有几年，那么 CA 就可以将那些已经过期了的证书从 CRL 里剔除，因为反正浏览器也不信任过期证书
+  function cancel() {
+    clearTimeout(time);
+    time = null;
+    arg = null;
+  }
+  function flush() {
+    cancel();
+    return func.apply(this, arg);
+  }
 
-### token 与 session
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+};
+```
 
-session:
+节流
 
-- 由于服务器端需要对接大量的客户端，也就需要存放大量的 SessionId，这样会导致服务器压力过大
-- 如果服务器端是一个集群，为了同步登录态，需要将 SessionId 同步到每一台机器上，无形中增加了服务器端维护成本
-- 由于 SessionId 存放在 Cookie 中，所以无法避免 CSRF 攻击
+```js
+const throttle = (func, wait = 0) => {
+    let time = null;
+    let arg = [];
+    let now;
+    function throttled(...args) {
+        if (!now) now = new Date().getTime()
+        if (time) {
+            clearTimeout(time)
+            time = null;
+        }
+        arg = args
+        return new Promise((resolve, reject) => {
+            if (new Date().getTime() - now > wait) {
+                try {
+                    const result = await func.apply(this, args)
+                    resolve(result)
+                } catch (e) {
+                    reject(e)
+                } finally {
+                    cancel()
+                }
+            } else {
+                time = setTimeout(async () => {
+                    try {
+                        let res = await func.apply(this, ...arg)
+                        resolve(res)
+                    } catch (e) {
+                        reject(e)
+                    } finally {
+                        cancel()
+                    }
 
-**Token 和 session 的区别**
+                }, wait - (new Date().getTime() - now > wait));
+            }
 
-- 跨域问题：token 没有跨域问题，session 有跨域问题；
-- 容易扩展：token 不储存于服务器中，适用于服务器的分布式应用；
-- CSRF：不依赖与 cookie，不会受到跨站请求伪造的攻击；
-- 性能：相对于 session，少了一次 sessionid 的计算；
+        })
+    }
+
+    function cancel() {
+        clearTimeout(time)
+        time = null;
+        arg = null;
+        now = null;
+    }
+    function flush() {
+        cancel()
+        return func.apply(this, arg)
+    }
+
+    throttled.cancel = cancel;
+    throttled.flush = flush;
+    return throttled
+}
+```
+
+### 洗牌算法
+
+```js
+function work(arr) {
+  let res = [];
+  while (arr.length) {
+    let tmp = Math.random() * arr.length;
+    res.push(arr[tmp]);
+    arr.splice(tmp, 1);
+  }
+  return res;
+}
+```
+
+### 树的前中层序遍历
+
+```js
+function front(root) {
+  let stack = [root];
+  let res = [];
+  while (stack.length) {
+    let node = stack.pop();
+    res.push(node.val);
+    node.right && stack.push(node.right);
+    node.left && stack.push(node.left);
+  }
+  return res;
+}
+
+function middle(root) {
+  let stack = [];
+  let res;
+  while (stack.length || root) {
+    if (root) {
+      stack.push(root);
+      root = root.left;
+    } else {
+      let node = stack.pop();
+      res.push(node.val);
+      stack.push(node.right);
+    }
+  }
+  return res;
+}
+
+function end(root) {
+  let stack = [root];
+  let stack2 = [];
+  while (stack1.length) {
+    let node = stack.pop();
+    stack2.push(node);
+    node.left && stack.push(left);
+    node.right && stack.push(right);
+  }
+  while (stack2.length) {
+    res.push(stack2.pop().val);
+  }
+  return res;
+}
+
+function ceng(root) {
+  let queue = [root];
+  let res = [];
+  while (queue.length) {
+    let node = queue.shift();
+    res.push(node.val);
+    node.left && queue.push(ndoe.left);
+    node.right && queue.push(ndoe.right);
+  }
+  return res;
+}
+```
+
+### 排序
+
+```js
+//快速排序
+function quickSort(arr, start = 0, end = arr.length - 1) {
+  if (!Array.isArray(arr) || arr.length < 1 || start > end) return;
+  let index = poition(arr, start, end);
+  quickSort(arr, start, index - 1);
+  quickSort(arr, index + 1, end);
+}
+
+function position(arr, start, end) {
+  let tmp = arr[start];
+  while (start < end) {
+    while (arr[end] >= tmp && start < end) end--;
+    arr[start] = arr[end];
+    while (arr[start] < tmp && start < end) start++;
+    arr[end] = arr[start];
+  }
+  arr[start] = tmp;
+  return start;
+}
+
+//冒泡排序
+function bubbleSort(arr) {
+  if (!Array.isArray(arr) || arr.length < 1) return;
+  let sign;
+  for (let i = 0; i < arr.length; i++) {
+    sign = true;
+    for (let j = 0; j < arr.length - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        [arr[j + 1], arr[j]] = [arr[j], arr[j + 1]];
+        sign = false;
+      }
+    }
+    if (sign) break;
+  }
+}
+
+//插入排序
+function inertSort(arr) {
+  if (!Array.isArray(arr) || arr.length < 1) return;
+  for (let i = 1; i < arr.length; i++) {
+    let tmp = arr[i];
+    let j = i;
+    while (j - 1 >= 0 && arr[j - 1] > tmp) {
+      arr[j] = arr[j - 1];
+      j--;
+    }
+    arr[j] = tmp;
+  }
+}
+
+//归并排序
+function mergeSort(arr) {
+  if (!Array.isArray(arr) || arr.length < 1) return;
+  if (arr.length === 1) return arr;
+  let mid = parseInt(arr.length >>> 1);
+  let left = arr.slice(0, mid);
+  let right = arr.slice(mid.arr.length);
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(arr1, arr2) {
+  let res = [];
+  let i1 = [];
+  let i2 = [];
+  while (i1 < arr1.length && i2 < arr2.length) {
+    if (arr1[i1] > arr2[i2]) res.push(arr[i2++]);
+    else res.push(arr[i1++]);
+  }
+  while (i1 < arr1.length) res.push(arr1[i1]);
+  while (i2 < arr2.length) res.push(arr2[i2]);
+  return res;
+}
+
+//选择排序
+function selectSort(arr) {
+  if (!Array.isArray(arr) || arr.length <= 1) return;
+  let min = Infinity;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i; j < arr.length; j++) {
+      if (arr[j] > min) min = j;
+    }
+    [arr[i], arr[min]] = [arr[min], arr[i]];
+  }
+}
+```
