@@ -70,4 +70,8 @@
 
 [每隔一定时间打印数字 && sleep ](https://github.com/1793523411/my-mian-note/issues/20)
 
+[二叉树前中后层序遍历](https://github.com/1793523411/my-mian-note/issues/23)
+
+[`new` 与 `Object.create()`](https://github.com/1793523411/my-mian-note/issues/24)
+
 ## nodejs

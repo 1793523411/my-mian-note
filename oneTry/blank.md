@@ -103,6 +103,26 @@ Function.prototype.myBind = function (ctx, ...args) {
 };
 ```
 
+### 手写 new 和 Object.create()
+
+```js
+function myNew(func, ...args) {
+  let obj = new Object();
+  obj.__proto__ = Object.create(func.pototype);
+  let res = func.apply(obj, [...args]);
+
+  let isObj = typeof res === "object" && res !== null;
+  let isFunc = typeof res === "function" ? true : false;
+  return isObj || isFunc ? res : obj;
+}
+
+function myCreate(obj) {
+  function F() {}
+  F.prototype = obj;
+  return new F();
+}
+```
+
 ### 手写遍历器
 
 ```js
@@ -414,5 +434,181 @@ function selectSort(arr) {
     }
     [arr[i], arr[min]] = [arr[min], arr[i]];
   }
+}
+```
+
+### 简单的发布订阅者模式
+
+```js
+class myEventEmmiter {
+  constructor() {
+    this.map = new Map();
+  }
+  on(name, handler, once = false) {
+    if (this.map.has(name)) {
+      let tmp = {
+        handler,
+        once,
+      };
+      this.map.get(name).push(tmp);
+    } else {
+      this.map.set(name, [
+        {
+          handler,
+          once,
+        },
+      ]);
+    }
+  }
+  emit(name, ...arg) {
+    let res = this.map.get(name) || [];
+    res.forEach((item) => {
+      item.handler(...arg);
+      if (item.once) {
+        this.off(name, item.handler);
+      }
+    });
+  }
+  off(name, handler) {
+    let res = this.map.get(name);
+    let index = res.findIndex((item) => item.handler === handler);
+    res.splice(index, 1);
+  }
+  once(name, handler) {
+    this.emit(name, handler, true);
+  }
+  offAll(name) {
+    this.map.delete(name);
+  }
+}
+
+let myevent = new myEventEmmiter();
+
+const fun1 = () => console.log("func1");
+const fun2 = () => console.log("func2");
+const fun3 = () => console.log("func3");
+
+myevent.on("first", fun1);
+myevent.on("first", fun2);
+myevent.on("first", fun3);
+
+myevent.emit("first");
+
+myevent.off("first", fun2);
+
+myevent.emit("first");
+```
+
+### 简单的观察者模式
+
+```js
+class Dep {
+  constructor() {
+    this.subs = [];
+  }
+  addSub(sub) {
+    if (sub && sub.update) {
+      this.subs.push(sub);
+    }
+  }
+  notify() {
+    this.subs.forEach((item) => {
+      item.update(item.name);
+    });
+  }
+}
+
+class Watch {
+  constructor(name) {
+    this.name = name;
+  }
+  update(name) {
+    console.log("update:", name);
+  }
+}
+
+let dep = new Dep();
+let watch = new Watch("watch");
+dep.addSub(watch);
+dep.notify();
+```
+
+### 封装 fetch
+
+```js
+function fetchRequest(method, url, data = {}, time = 5000) {
+  let payload = null;
+  let query = "";
+  if (method === "GET") {
+    for (const key in data) {
+      query += `&${key}=${data[key]}`;
+    }
+    if (query) {
+      query = "?" + query.slice();
+    }
+  } else {
+    payload = JSON.stringify(data);
+  }
+  return new Promise((resolve, reject) => {
+    fetch(url + query, {
+      credentials: "include",
+      method,
+      headers: {
+        "Content-Type": "xxx",
+      },
+      body: payload,
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+    setTimeout(() => {
+      reject(reject.bind(this, "fetch i time out"));
+    }, time);
+  });
+}
+
+fetchRequest("GET", "xxx").then((res) => {
+  console.log(res);
+});
+```
+
+### 封装 ajax
+
+```js
+function ajaxRequest(method, url, data = {}, successFn, failFn) {
+  const XHR = new XMLHttpRequest();
+  let sendData = "";
+  for (let key in data) {
+    sendData += `&${key}=${data[key]}`;
+  }
+  switch (method) {
+    case "GET":
+      url = sendData ? `${url}?${sendData}` : url;
+      sendData = null;
+      break;
+    case "POST":
+      if (sendData) {
+        sendData = sendData.slice(1);
+      }
+      break;
+  }
+  XHR.onreadystatechange = function () {
+    if (XHR.readyState !== 4) return;
+    if (XHR.status === 200 || XHR.status === 304) {
+      typeof successFn === "function" && successFn(XHR.response);
+    } else {
+      typeof failFn === "function" && failFn(XHR);
+    }
+  };
+  XHR.open(method, url, true);
+  XHR.setRequestHeader("Content-Type", "application/x-www/from-urlencoded");
+  XHR.send(sendData);
 }
 ```
