@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        let ul = document.querySelector('ul')
+        ul.addEventListener('click', function (event) {
+            if (event.target.tagName.toLowerCase() === 'li'){
+                console.log(event)
+                event.stopPropagation()//stopPropagation方法只会阻止事件的传播，不会阻止该事件触发<p>节点的其他click事件的监听函数
+                event.stopImmediatePropagation()//如果想要彻底阻止这个事件的传播，不再触发后面所有click的监听函数(本身的还是会触发的)，可以使用stopImmediatePropagation方法
+            }
+        })
+    </script>
+</body>
+
+</html>

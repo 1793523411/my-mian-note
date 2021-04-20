@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="btn">btn</div>
+    <script>
+        function hello() {
+            console.log('hello~')
+        }
+        function hello2(x) {
+            console.log('x:', x)
+        }
+        var btn = document.getElementById('btn')
+        btn.addEventListener('click', hello)
+        btn.addEventListener('click', function () { hello2('123456') })
+        btn.addEventListener('click', {
+            handleEvent: function (event) {
+                console.log('click~')
+            }
+        }, {
+            capture: true,
+            once: true,
+            passive: true
+        })
+        function eventFn(e){
+            console.log(e)
+        }
+        // btn.addEventListener('click', function (e) {
+        //     console.log(e)
+        // })
+        btn.addEventListener('click',eventFn)
+        //! removeEventListener方法移除的监听函数，必须是addEventListener方法添加的那个监听函数，而且必须在同一个元素节点，否则无效
+        //! 监听函数不是同一个匿名函数,removeEventListener方法无效
+        //! 第三个参数不一样,removeEventListener方法也是无效的
+    </script>
+</body>
+
+</html>

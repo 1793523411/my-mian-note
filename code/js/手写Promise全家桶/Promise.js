@@ -235,7 +235,7 @@ Promise.allSettld = function (promiseArr) {
                 }, function (reason) {
                     result[count++] = { status: 'rejected', reason: reason }
                     if (count === length) {
-                        return resolve(result)
+                        return reject(result)
                     }
                 })
             }
