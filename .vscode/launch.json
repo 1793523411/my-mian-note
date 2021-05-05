@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\code\\js\\手写Promise全家桶\\Generator.js"
+            "program": "${workspaceFolder}\\code2-3\\09二分查找.js"
         }
     ]
 }

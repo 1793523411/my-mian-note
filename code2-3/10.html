@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- <button @click="add">{{count}}</button> -->
+        <button>click</button>
+    </div>
+    <script src="./10防抖节流.js"></script>
+    <script>
+        const btn = document.querySelector('button')
+        console.log(btn)
+        function work() {
+            console.log('work')
+        }
+        let debounceWork = debounce(work,3000)
+        let throttleWork = throttle(work,3000)
+        console.log(throttleWork)
+        btn.addEventListener('click',throttleWork)
+    </script>
+    <!-- <script>
+        const work = () => {
+            vue.count++
+        }
+        // let res = debounce(work,3000)
+        let res = throttle(work, 3000)
+        res().then(res => {
+            console.log(res)
+        })
+        let vue = new Vue({
+            el: "#root",
+            data: {
+                count: 0
+            },
+            methods: {
+                add:res
+            },
+        })
+    </script> -->
+
+</body>
+
+</html>
