@@ -612,3 +612,36 @@ function ajaxRequest(method, url, data = {}, successFn, failFn) {
   XHR.send(sendData);
 }
 ```
+
+### sleep 实现
+
+```js
+function sleep(time) {
+  let start = new Date().getTime();
+  let end;
+  while (true) {
+    end = new Date().getTime();
+    console.log(`end-start=${end - start}`);
+    if (end - start > time) break;
+  }
+  return "end";
+}
+```
+
+或
+
+```js
+function sleep2(time) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+}
+
+async function foo(time) {
+  console.log("start");
+  await sleep2(time);
+  console.log("end");
+}
+```
