@@ -11,7 +11,7 @@ function curry(fn, args) {
         if (subArgs.length >= length) {
             return fn.apply(this, subArgs)
         } else {
-            return curry.call(this, fn, subArgs);
+            return curry.call(this, fn, ...subArgs);
         }
     }
 }

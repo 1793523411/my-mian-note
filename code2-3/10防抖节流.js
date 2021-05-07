@@ -85,3 +85,51 @@ const throttle = (fn, timeout) => {
     throlled.flush = flush
     return throlled
 }
+
+
+const singlePipe = function (promiseFunc) {
+    let sign = false;
+    async function work(...arg) {
+        if (!sign) {
+            sign = true;
+            let res = await promiseFunc(...arg)
+            sign = false;
+            return res;
+        }else{
+            return ""
+        }
+    }
+    return work
+};
+const singlePipe2 = function (promiseFunc) {
+    let sign = false;
+    function work(...arg) {
+        if (!sign) {
+            sign = true
+            return new Promise((resolve, reject) => {
+                let res = promiseFunc(...arg)
+                resolve(res)
+            }).then(res => {
+                sign = false;
+                return res
+            })
+        } else {
+            return new Promise((resolve, reject) => {
+                resolve("")
+            })
+        }
+    }
+    return work
+};
+// 测试
+var promiseFunc = function (data) {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(data), 1000);
+    });
+};
+var request = singlePipe(promiseFunc);
+request(1).then((data) => console.log(data)); // 1
+request(2).then((data) => console.log(data)); // 无反应
+setTimeout(() => {
+    request(3).then((data) => console.log(data)); // 3
+}, 1000);
