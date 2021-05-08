@@ -6,33 +6,14 @@
 
 [componentWillUpdate 可以直接修改 state 的值吗？](https://blog.csdn.net/littleCucumber/article/details/115872420)
 
-[说说你对 React 的渲染原理的理解](https://github.com/1793523411)
+[说说你对 React 的渲染原理的理解](https://blog.csdn.net/littleCucumber/article/details/115912202)
 
-[什么渲染劫持？](https://github.com/1793523411)
+[什么渲染劫持？](https://blog.csdn.net/littleCucumber/article/details/116519081)
 
-[React Intl 是什么原理？](https://github.com/1793523411)
+[React Intl 是什么原理？| 你有使用过 React Intl 吗？ | 怎么实现 React 组件的国际化呢？](https://blog.csdn.net/littleCucumber/article/details/116537394)
 
-[你有使用过 React Intl 吗？](https://github.com/1793523411)
+[说说 Context 有哪些属性？| 怎么使用 Context 开发组件？| 为什么 React 并不推荐我们优先考虑使用 Context？ | 除了实例的属性可以获取 Context 外哪些地方还能直接获取 Context 呢？|childContextTypes 是什么？它有什么用？|contextType 是什么？它有什么用？|Consumer 向上找不到 Provider 的时候怎么办？|有使用过 Consumer 吗？|在 React 怎么使用 Context？](https://github.com/1793523411)
 
-[怎么实现 React 组件的国际化呢？](https://github.com/1793523411)
-
-[说说 Context 有哪些属性？](https://github.com/1793523411)
-
-[怎么使用 Context 开发组件？](https://github.com/1793523411)
-
-[为什么 React 并不推荐我们优先考虑使用 Context？](https://github.com/1793523411)
-
-[除了实例的属性可以获取 Context 外哪些地方还能直接获取 Context 呢？](https://github.com/1793523411)
-
-[childContextTypes 是什么？它有什么用？](https://github.com/1793523411)
-
-[contextType 是什么？它有什么用？](https://github.com/1793523411)
-
-[Consumer 向上找不到 Provider 的时候怎么办？](https://github.com/1793523411)
-
-[有使用过 Consumer 吗？](https://github.com/1793523411)
-
-[在 React 怎么使用 Context？](https://github.com/1793523411)
 
 [React15 和 16 别支持 IE 几以上？](https://github.com/1793523411)
 
