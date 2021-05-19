@@ -57,3 +57,38 @@ res(3)
 const arrow = () => [1, 2, 3]
 
 console.log(typeof arrow)
+
+
+//!bind五层,主要比上面多了new的考虑
+/**
+ * 1.绑定在原型上
+ * 2.该变thi指向
+ * 3.支持柯里化
+ * 4.考虑new的调用
+ * 5.保留函数原型
+ */
+
+Function.prototype._bind = function (thisobj) {
+    if (typeof target !== 'function' || Object.prototype.toString.call(target) !== '[object Function]') {
+        throw new TypeError('must be a function')
+    }
+    const self = this;
+    const args = [...arguments].slice(1);
+    var bound = function () {
+        const finalArgs = [...args, ...arguments];
+        if (new.target !== undefined) {
+            let result = self.apply(this, finalArgs)
+            if (result instanceof Object) {
+                return result
+            }
+            return this
+        } else {
+            return self.apply(this, finalArgs)
+        }
+    }
+    if (self.prototype) {
+        bound.prototype = Object.create(self.prototype)
+        bound.prototype.constructor = self
+    }
+    return bound
+}
