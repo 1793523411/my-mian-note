@@ -23,6 +23,7 @@
 [v8 垃圾回收机制](https://juejin.cn/post/6844904016325902344)
 
 [浮点数精度](https://github.com/mqyqingfeng/Blog/issues/155)
+
 [1.0+0.2 的问题](http://vhblog.ygjie.icu/zh/essay/02/#_0-1-0-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%AD%89%E4%BA%8E-0-3)
 
 **[几道面试题](https://github.com/mqyqingfeng/frontend-interview-question-and-answer/issues/30)**

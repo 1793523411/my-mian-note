@@ -1,220 +1,40 @@
-## list 转树
+# 大文件上传
 
-> 来自今天的一道面试题
+上传大文件时，以下几个变量会影响我们的用户体验
 
-给一个数组：
++ 服务器处理数据的能力
++ 请求超时
++ 网络波动
++ 上传时间会变长，高频次文件上传失败，失败后又需要重新上传等等
 
-```js
-let list = [
-  {
-    id: 0,
-    val: 0,
-    parentId: null,
-  },
-  {
-    id: 1,
-    val: 1,
-    parentId: 0,
-  },
-  {
-    id: 2,
-    val: 2,
-    parentId: 1,
-  },
-  {
-    id: 3,
-    val: 3,
-    parentId: 1,
-  },
-  {
-    id: 4,
-    val: 4,
-    parentId: 2,
-  },
-  {
-    id: 5,
-    val: 5,
-    parentId: 0,
-  },
-];
-```
+为了解决上述问题，我们需要对大文件上传单独处理
 
-转成树结构
+这里涉及到分片上传及断点续传两个概念
 
-思路一：现在原数组的基础上添加 children 字段，这样就保证了正确的 item 在对应的数组的 item 的 children 里，显然这还存在多余的数据，再用 filter 吧根节点过滤掉即可,如果要求不修改原数组，可以深拷贝一下
+## 分片上传
 
-```js
-function listToTree(list) {
-  list.forEach((element) => {
-    let parentId = element.parentId;
-    if (parentId !== null) {
-      list.forEach((ele) => {
-        if (ele.id == parentId) {
-          if (!ele.children) {
-            ele.children = [];
-          }
-          ele.children.push(element);
-        }
-      });
-    }
-  });
-  list = list.filter((ele) => ele.parentId === null);
-  return list;
-}
-```
+分片上传，就是将所要上传的文件，按照一定的大小，将整个文件分隔成多个数据块（Part）来进行分片上传
 
-思路二：这道题的关键点在与在逻辑中获取到当前元素的父元素，所以可以用一个 map 来存这些父项，以此在对当前元素进行操作时可以随时获取到父项的引用，然后遍历 list 对根元素是一种操作，非根元素将自身插入到父项的 children 中，父项可以从前面 map 中找
+上传完之后再由服务端对所有上传的文件进行汇总整合成原始的文件
 
-```js
-function convert(list) {
-  const res = [];
-  const map = list.reduce((res, v) => ((res[v.id] = v), res), {});
-  for (const item of list) {
-    if (item.parentId === null) {
-      res.push(item);
-      continue;
-    }
-    if (item.parentId in map) {
-      const parent = map[item.parentId];
-      parent.children = parent.children || [];
-      parent.children.push(item);
-    }
-  }
-  return res;
-}
-```
+大致流程如下：
 
-思路三：使用递归
++ 将需要上传的文件按照一定的分割规则，分割成相同大小的数据块；
++ 初始化一个分片上传任务，返回本次分片上传唯一标识；
++ 按照一定的策略（串行或并行）发送各个分片数据块；
++ 发送完成后，服务端根据判断数据上传是否完整，如果完整，则进行数据块合成得到原始文件
 
-```js
-function listToTree2(list) {
-  function convert2(list, parentId) {
-    let res = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].parentId === parentId) {
-        let itemChildren = convert2(list, list[i].id);
-        if (itemChildren.length) item.children = itemChildren;
-        res.push(list[i]);
-      }
-    }
-    return res;
-  }
-  return convert2(list, null);
-}
-```
+## 断点续传
 
-这道题的递归让我想到了另外一道题：dom 转为对象
+断点续传指的是在下载或上传时，将下载或上传任务人为的划分为几个部分
 
-大致是这样一个要求:
+每一个部分采用一个线程进行上传或下载，如果碰到网络故障，可以从已经上传或下载的部分开始继续上传下载未完成的部分，而没有必要从头开始上传下载。用户可以节省时间，提高速度
 
-```html
-<div id="jsContainer">
-  <ul class="js-test" id="jsParent">
-    <li data-index="0">1</li>
-    <li data-index="1">2</li>
-  </ul>
-  <span style="font-weight: bold;">3</span>
-  4
-</div>
-```
+一般实现方式有两种：
 
-转为
++ 服务器端返回，告知从哪开始
++ 浏览器端自行处理
++ 上传过程中将文件在服务器写为临时文件，等全部写完了（文件上传完），将此临时文件重命名为正式文件即可
 
-```js
-{
-  "tag": "DIV",
-  "attributes": {
-    "id": "jsContainer"
-  },
-  "children": [
-    "",
-    {
-      "tag": "UL",
-      "attributes": {
-        "class": "js-test"
-      },
-      "children": [
-        "",
-        {
-          "tag": "LI",
-          "attributes": {
-            "data-index": "0"
-          },
-          "children": [
-            "1"
-          ]
-        },
-        "",
-        {
-          "tag": "LI",
-          "attributes": {
-            "data-index": "1"
-          },
-          "children": [
-            "2"
-          ]
-        },
-        ""
-      ]
-    },
-    "",
-    {
-      "tag": "SPAN",
-      "attributes": {
-        "style": "font-weight: bold;"
-      },
-      "children": [
-        "3"
-      ]
-    },
-    "4"
-  ]
-}
-```
+如果中途上传中断过，下次上传的时候根据当前临时文件大小，作为在客户端读取文件的偏移量，从此位置继续读取文件数据块，上传到服务器从此偏移量继续写入文件即可
 
-实现如下
-
-```html
-<body>
-  <div id="jsContainer">
-    <ul class="js-test" id="jsParent">
-      <li data-index="0">1</li>
-      <li data-index="1">2</li>
-    </ul>
-    <span style="font-weight: bold;">3</span>
-    4
-  </div>
-  <script>
-    let father = document.querySelector("#jsContainer");
-
-    console.log(father.attributes);
-    console.log(father.childNodes);
-    console.log(father.childNodes[0].nodeName);
-    let res = {};
-
-    function htmlToDom(father) {
-      let obj = {};
-      obj.tag = father.tagName;
-      let res = {};
-      console.log(father.data);
-      console.log(father.text);
-      if (father.nodeName !== "#text") {
-        for (const [key, value] of Array(father.attributes)) {
-          console.log(key.name);
-          res[key.name] = key.nodeValue;
-        }
-        obj.attributes = res;
-      } else {
-        return father.data.replace(/\s+/g, "");
-      }
-
-      obj.children = [];
-      father.childNodes.forEach((child) => obj.children.push(htmlToDom(child)));
-      return obj;
-    }
-
-    console.log(htmlToDom(father));
-    console.log(JSON.stringify(htmlToDom(father), "", "  "));
-  </script>
-</body>
-```

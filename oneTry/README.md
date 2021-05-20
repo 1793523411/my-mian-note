@@ -24,6 +24,8 @@
 
 [讲一下token](https://github.com/1793523411/my-mian-note/issues/22)
 
+[onload,onready,DOMContentLoaded](https://github.com/1793523411/my-mian-note/issues/25)
+
 ## 浏览器
 
 ## css
@@ -35,6 +37,14 @@
 ## 网络
 
 ## JavaScript
+
+[object 还是 map？](https://github.com/1793523411/my-mian-note/issues/30)
+
+[正则小笔记](https://github.com/1793523411/my-mian-note/issues/28)
+
+[事件模型](https://github.com/1793523411/my-mian-note/issues/27)
+
+
 
 ## React
 
@@ -73,5 +83,9 @@
 [二叉树前中后层序遍历](https://github.com/1793523411/my-mian-note/issues/23)
 
 [`new` 与 `Object.create()`](https://github.com/1793523411/my-mian-note/issues/24)
+
+[数组转成树](https://github.com/1793523411/my-mian-note/issues/29)
+
+[实现井字小游戏](https://github.com/1793523411/my-mian-note/issues/26)
 
 ## nodejs
